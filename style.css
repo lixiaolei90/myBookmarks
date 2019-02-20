@@ -17,7 +17,7 @@ main {
     display: inline-block;
 }
 #mainX > div:nth-child(2) {
-    margin-left: 1em;
+    margin-left: -10px;
 }
 #mainX > div:nth-child(3) {
     margin-left: 2em;

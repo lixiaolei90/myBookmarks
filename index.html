@@ -10,8 +10,28 @@
 <body>
     <header></header>
     <main>
-        <div class="wrapper" id="mainX">
-            
+        <style>
+            .key {
+                width:50px;
+                height: 40px;
+                background: linear-gradient(to bottom, #292929 0%, #111111 100%);
+                border: 1px solid #373737;
+                color: #c5c5c5;
+                border-radius: 6px;
+                box-shadow: 0 0 0 1px #1a1b1c, 0 0 0 2px #1f2020, 0 3px 0 2px #080808;
+                display: inline-flex;
+                align-items: center;
+                justify-items: center;
+            }
+            .row {
+                margin: 16px; 
+            }
+            .row > .key {
+                margin: 0 5px;
+            }
+        </style>
+        <kbd class="key">a</kbd>
+        <div class="wrapper" id="mainX"> 
         </div>
     </main>
     <footer></footer>
@@ -31,12 +51,14 @@
         var index = 0;
         while (index < keys['length']) {
             divX = document.createElement('div');
+            divX.className = 'row';
             mainX.appendChild(divX);
             row = keys[index];
             index2 = 0;
             while (index2 < row['length']) {
                 kbdX = document.createElement('kbd');
                 kbdX.textContent = row[index2];
+                kbdX.className = 'key';
                 buttonX = document.createElement('button');
                 buttonX.textContent = '编辑';
                 buttonX.id = row[index2]
