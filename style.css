@@ -16,18 +16,26 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(bg.jpg);
+    background-size: cover;
 }
 #mainX {
     /* border: 1px solid black; */
     display: inline-block;
+    background:rgba(255,255,255,0.15);
+    border-radius: 10px;
 }
 #mainX > div:nth-child(2) {
     /* border: 1px solid red; */
-    margin-left: -15px;
+    margin-left: 10px;
 }
 #mainX > div:nth-child(3) {
     /* border: 1px solid red; */
-    margin-left: -70px;
+    margin-left: -60px;
+}
+.iconImg {
+    width: 16px;
+    height: 16px;
 }
 button {
     display: none;
@@ -51,7 +59,7 @@ kbd:hover > button {
     justify-items: center;
 }
 .row {
-    margin: 16px; 
+    margin: 30px; 
 }
 .row > .key {
     margin: 0 5px;

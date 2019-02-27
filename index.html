@@ -21,7 +21,11 @@
 				'2': {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
 				'length': 3
 			}
-		var hash = {'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tianya.com', 'y': 'youtube.com', 'u': 'uc.com' , 'i': 'iqiyi.com', 'o': 'opera.com', 'p': undefined, 'a': 'acfun.tv', 's': 'sohu.com', 'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn'
+		var hash = {'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me',
+         'r': 'renren.com', 't': 'tencent.com', 'y': 'youtube.com', 
+         'u': 'uc.cn' , 'i': 'iqiyi.com', 'o': 'opera.com',
+          'p': undefined, 'a': 'acfun.tv', 's': 'sohu.com', 
+          'z': 'zhihu.com', 'm': 'www.mcdonalds.com.cn','j':'jd.com'
 			}
         var hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || null);
         if(hashInLocalStorage) {
@@ -36,7 +40,20 @@
             index2 = 0;
             while (index2 < row['length']) {
                 kbdX = document.createElement('kbd');
-                kbdX.textContent = row[index2];
+                
+                kbInfo = document.createElement('span');
+                kbInfo.textContent = row[index2];
+                kbImg = document.createElement('img');
+                if (hash[row[index2]]) {    
+                    kbImg.src = "http://" + hash[row[index2]] + "/favicon.ico";
+                } else {
+                    kbImg.src = "nullImg.png";
+                }
+                kbImg.onerror = function (xx) {
+                    xx.target.src = "nullImg.png";
+                }
+                
+                kbImg.className = "iconImg"
                 kbdX.className = 'key';
                 buttonX = document.createElement('button');
                 buttonX.textContent = '编辑';
@@ -48,6 +65,8 @@
                     localStorage.setItem('zzz', JSON.stringify(hash));
                     console.log(hash);
                 }
+                kbdX.appendChild(kbInfo);
+                kbdX.appendChild(kbImg);
                 kbdX.appendChild(buttonX);
                 divX.appendChild(kbdX);
                 index2 = index2 + 1;
