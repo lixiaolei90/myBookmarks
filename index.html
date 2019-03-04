@@ -49,8 +49,8 @@
                 } else {
                     kbImg.src = "nullImg.png";
                 }
-                kbImg.onerror = function (xx) {
-                    xx.target.src = "nullImg.png";
+                kbImg.onerror = function (event) {
+                    event.target.src = "nullImg.png";
                 }
                 
                 kbImg.className = "iconImg"
@@ -62,6 +62,10 @@
                     var key = event['target']['id'];
                     var x = prompt('give me a website');
                     hash[key] = x;
+                    kbImg.src = "http://" + x + "/favicon.ico";
+                    kbImg.onerror = function (event) {
+                    event.target.src = "nullImg.png";
+                }
                     localStorage.setItem('zzz', JSON.stringify(hash));
                     console.log(hash);
                 }
