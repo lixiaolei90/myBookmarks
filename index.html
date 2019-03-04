@@ -61,9 +61,11 @@
                 buttonX.onclick = function (event) {
                     var key = event['target']['id'];
                     var x = prompt('give me a website');
+                    var button2 = event['target'];
+                    var img2 = button2.previousSibling;
                     hash[key] = x;
-                    kbImg.src = "http://" + x + "/favicon.ico";
-                    kbImg.onerror = function (event) {
+                    img2.src = "http://" + x + "/favicon.ico";
+                    img2.onerror = function (event) {
                     event.target.src = "nullImg.png";
                 }
                     localStorage.setItem('zzz', JSON.stringify(hash));
