@@ -36,6 +36,9 @@ main {
 .iconImg {
     width: 16px;
     height: 16px;
+    position: absolute;
+    bottom: 2px;
+    left: 4px;
 }
 button {
     display: none;
@@ -57,6 +60,17 @@ kbd:hover > button {
     display: inline-flex;
     align-items: center;
     justify-items: center;
+    position: relative;
+}
+.key .text {
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    font-size: 16px;
+    font-family: Helvetica;
+}
+.key img {
+
 }
 .row {
     margin: 30px; 

@@ -40,9 +40,9 @@
             index2 = 0;
             while (index2 < row['length']) {
                 kbdX = document.createElement('kbd');
-                
                 kbInfo = document.createElement('span');
                 kbInfo.textContent = row[index2];
+                kbInfo.className = 'text';
                 kbImg = document.createElement('img');
                 if (hash[row[index2]]) {    
                     kbImg.src = "http://" + hash[row[index2]] + "/favicon.ico";
