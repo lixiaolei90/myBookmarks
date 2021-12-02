@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>我的导航</title>
-    <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>我的导航</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header></header>
-    <main>
-        <div class="wrapper" id="mainX"> 
-        </div>
-    </main>
-    <footer></footer>
-    <script>
-        var keys = {
-				'0': {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
-				'1': {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
-				'2': {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
-				'length': 3
+<header></header>
+<main>
+	<div class="wrapper" id="main">
+	</div>
+</main>
+<footer></footer>
+<script>
+	//1，初始化数据
+	let keys = {
+		'0': {0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length: 10},
+		'1': {0: 'a', 1: 's', 2: 'd', 3: 'f', 4: 'g', 5: 'h', 6: 'j', 7: 'k', 8: 'l', length: 9},
+		'2': {0: 'z', 1: 'x', 2: 'c', 3: 'v', 4: 'b', 5: 'n', 6: 'm', length: 7},
+		'length': 3
+	}
+	let hash = {
+		'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me',
+		'r': 'renren.com', 't': 'tencent.com', 'y': 'youku.com',
+		'u': 'uc.cn', 'i': 'iqiyi.com', 'o': 'opera.com',
+		 'a': 'alibaba.com', 's': 'sohu.com', 'd': 'douban.com',
+		'g': 'ganji.com', 'k': 'kaixin001.com',
+		'z': 'zhihu.com', 'x': 'xunlei.com', 'c': 'cctv.com',
+		'm': 'www.mcdonalds.com.cn', 'b': 'baihe.com', 'j': 'jd.com'
+	}
+	let hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || null);
+	if (hashInLocalStorage) {
+		hash = hashInLocalStorage;
+	}
+
+	//2，生成键盘
+	for(let index = 0; index < keys['length']; index++) {
+		let div = document.createElement('div');
+		div.className = 'row';
+
+		main.appendChild(div);
+
+		let row = keys[index];
+		for(let index2 = 0; index2 < row['length']; index2++){
+			let kbd = document.createElement('kbd');
+			kbd.className = 'key';
+
+			let kbdInfo = createKbdinfo(row[index2])
+			let kbdImg = createImg(hash[row[index2]])
+			let button = createButton(row[index2])
+
+			kbd.appendChild(kbdInfo);
+			kbd.appendChild(kbdImg);
+			kbd.appendChild(button);
+			div.appendChild(kbd);
+		}
+	}
+
+	//3，监控键盘
+	document.onkeypress = function (event) {
+		let key = event['key'];
+		let website = hash[key];
+		window.open('https://' + website, '_blank')
+	}
+	function createKbdinfo(kbd) {
+		let kbdInfo = document.createElement('span');
+		kbdInfo.textContent = kbd;
+		kbdInfo.className = 'text';
+		return kbdInfo
+	}
+	function createImg(domain) {
+		let kbdImg = document.createElement('img');
+		if (domain) {
+			kbdImg.src = "https://" + domain + "/favicon.ico";
+		} else {
+			kbdImg.src = "nullImg.png";
+		}
+		kbdImg.onerror = function (event) {
+			event.target.src = "nullImg.png";
+		}
+		kbdImg.className = "iconImg"
+		return kbdImg
+	}
+	function createButton(id) {
+		let button = document.createElement('button');
+		button.textContent = '编辑';
+		button.id = id
+		button.onclick = function (event) {
+			let key = event['target']['id'];
+			let x = prompt('give me a website');
+			let button2 = event['target'];
+			let img2 = button2.previousSibling;
+			hash[key] = x;
+			img2.src = "https://" + x + "/favicon.ico";
+			img2.onerror = function (event) {
+				event.target.src = "nullImg.png";
 			}
-		var hash = {'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me',
-         'r': 'renren.com', 't': 'tencent.com', 'y': 'youku.com',
-         'u': 'uc.cn' , 'i': 'iqiyi.com', 'o': 'opera.com',
-          'p': undefined, 'a': 'alibaba.com', 's': 'sohu.com','d':'douban.com',
-            'g':'ganji.com','k':'kaixin001.com',
-          'z': 'zhihu.com', 'x':'xunlei.com','c':'cctv.com',
-            'm': 'www.mcdonalds.com.cn','b':'baihe.com','j':'jd.com'
-			}
-        var hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || null);
-        if(hashInLocalStorage) {
-            hash = hashInLocalStorage;
-        }
-        var index = 0;
-        while (index < keys['length']) {
-            divX = document.createElement('div');
-            divX.className = 'row';
-            mainX.appendChild(divX);
-            row = keys[index];
-            index2 = 0;
-            while (index2 < row['length']) {
-                kbdX = document.createElement('kbd');
-                kbInfo = document.createElement('span');
-                kbInfo.textContent = row[index2];
-                kbInfo.className = 'text';
-                kbImg = document.createElement('img');
-                if (hash[row[index2]]) {    
-                    kbImg.src = "http://" + hash[row[index2]] + "/favicon.ico";
-                } else {
-                    kbImg.src = "nullImg.png";
-                }
-                kbImg.onerror = function (event) {
-                    event.target.src = "nullImg.png";
-                }
-                
-                kbImg.className = "iconImg"
-                kbdX.className = 'key';
-                buttonX = document.createElement('button');
-                buttonX.textContent = '编辑';
-                buttonX.id = row[index2]
-                buttonX.onclick = function (event) {
-                    var key = event['target']['id'];
-                    var x = prompt('give me a website');
-                    var button2 = event['target'];
-                    var img2 = button2.previousSibling;
-                    hash[key] = x;
-                    img2.src = "http://" + x + "/favicon.ico";
-                    img2.onerror = function (event) {
-                    event.target.src = "nullImg.png";
-                }
-                    localStorage.setItem('zzz', JSON.stringify(hash));
-                    console.log(hash);
-                }
-                kbdX.appendChild(kbInfo);
-                kbdX.appendChild(kbImg);
-                kbdX.appendChild(buttonX);
-                divX.appendChild(kbdX);
-                index2 = index2 + 1;
-            }
-            index = index + 1;
-        }
-        document.onkeypress = function (event) {
-            key = event['key'];
-            website = hash[key];
-            window.open('http://' + website, '_blank')
-        }
-        
-        
-    </script>
+			localStorage.setItem('zzz', JSON.stringify(hash));
+		}
+		return button
+	}
+</script>
 </body>
 </html>
