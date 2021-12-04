@@ -10,6 +10,7 @@ kbd {
     position: relative;
 }
 main {
+
     text-align: center;
     /* border: 1px solid red; */
     height: 100vh;
@@ -22,9 +23,11 @@ main {
 }
 #main {
     /* border: 1px solid black; */
+    position:relative;
     display: inline-block;
     background:rgba(255,255,255,0.15);
     border-radius: 10px;
+    padding-bottom: 50px;
 }
 #main > div:nth-child(2) {
     /* border: 1px solid red; */
@@ -76,3 +79,12 @@ kbd:hover > button {
 .row > .key {
     margin: 0 5px;
 }
+
+.warning {
+    position:absolute;
+    top:260px;
+    left:130px;
+    color:#1a1b1c;
+    visibility: hidden;
+}
+

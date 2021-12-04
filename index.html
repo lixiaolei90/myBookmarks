@@ -11,9 +11,13 @@
 <header></header>
 <main>
 	<div class="wrapper" id="main">
+		<div class="warning" id="warning">
+			暂时找不到这个按键的配置,请编辑后重新尝试( ⊙o⊙ )
+		</div>
 	</div>
+
 </main>
-<footer></footer>
+
 <script>
 	//1，初始化数据
 
@@ -42,7 +46,7 @@
 			'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me',
 			'r': 'renren.com', 't': 'tencent.com', 'y': 'youku.com',
 			'u': 'uc.cn', 'i': 'iqiyi.com', 'o': 'opera.com',
-			'a': 'alibaba.com', 's': 'sohu.com', 'd': 'douban.com',
+			'a': 'alibaba.com', 's': 'sougou.com', 'd': 'douban.com',
 			'g': 'ganji.com', 'k': 'kaixin001.com',
 			'z': 'zhihu.com', 'x': 'xunlei.com', 'c': 'cctv.com',
 			'm': 'www.mcdonalds.com.cn', 'b': 'baihe.com', 'j': 'jd.com'
@@ -91,7 +95,7 @@
 	function createImg(domain) {
 		let kbdImg = document.createElement('img');
 		if (domain) {
-			kbdImg.src = "https://" + domain + "/favicon.ico";
+			kbdImg.src = "http://" + domain + "/favicon.ico";
 		} else {
 			kbdImg.src = "nullImg.png";
 		}
@@ -125,7 +129,18 @@
 		document.onkeypress = function (event) {
 			let key = event['key'];
 			let website = hash[key];
-			window.open('https://' + website, '_blank')
+
+			if (typeof website !== "undefined") {
+				window.open('https://' + website, '_blank')
+			} else {
+				let message = document.getElementById('warning')
+				message.style.visibility = "visible"
+				setTimeout(changeVis, 2500, message)
+
+				function changeVis(message) {
+					message.style.visibility = "hidden"
+				}
+			}
 		}
 	}
 </script>
